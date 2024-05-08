@@ -1,16 +1,36 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { aws_codebuild as codebuild } from 'aws-cdk-lib';
+import { version } from 'os';
 
 export class CodeBuildPlaygroundStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const source: codebuild.Source = codebuild.Source.gitHub({
+      owner: 'kaiwensun',
+      repo: 'leetcode'
+    })
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'CodeBuildPlaygroundQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const project = new codebuild.Project(this, 'CdkManagedProject', {
+      projectName: 'CdkManagedProject',
+      environment: {
+        buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_ARM_3
+      },
+      buildSpec: codebuild.BuildSpec.fromObject({
+        version: '0.2',
+        phases: {
+          build: {
+            commands: [
+              'echo Hello world',
+              'date',
+              'yum install tree -y',
+              'tree'
+            ]
+          }
+        }
+      }),
+      source: source
+    });
   }
 }
