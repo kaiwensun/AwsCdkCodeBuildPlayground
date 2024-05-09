@@ -1,15 +1,16 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { aws_codebuild as codebuild } from 'aws-cdk-lib';
-import { version } from 'os';
+import { load_configs } from './utils';
 
 export class CodeBuildPlaygroundStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    const config = load_configs()
     const source: codebuild.Source = codebuild.Source.gitHub({
-      owner: 'kaiwensun',
-      repo: 'leetcode'
+      owner: config['github_user'],
+      repo: config['github_repo'],
     })
 
     const project = new codebuild.Project(this, 'CdkManagedProject', {
