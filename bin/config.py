@@ -28,15 +28,19 @@ password_keys = [key for key in FIELDS.keys() if FIELDS.get(key, {}).get('is_pas
 if path.exists(file_path):
     with open(file_path, 'r') as f:
         old = json.load(f)
-        redacted = dict(old)
-        for field in redacted:
-            if FIELDS.get(field, {}).get('is_password'):
-                redacted[field] = '<redacted>'
-        print("Existing config:")
-        print(json.dumps(redacted, indent=4))
 else:
     old = {}
-    redacted = {}
+    for field in FIELDS:
+        if 'default' in FIELDS.get(field, {}):
+            old[field] = FIELDS[field]['default']
+
+redacted = dict(old)
+for field in redacted:
+    if FIELDS.get(field, {}).get('is_password'):
+        redacted[field] = '<redacted>'
+
+print("Existing config:")
+print(json.dumps(redacted, indent=4))
 
 print('Setting new config (input "DEL" to delete):')
 config = dict(old)
