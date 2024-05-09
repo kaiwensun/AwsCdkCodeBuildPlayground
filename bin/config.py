@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import os.path as path
+import os
 import json
+
 
 FILE_NAME=".config.json"
 FIELDS = [
@@ -24,3 +26,4 @@ for field in FIELDS:
 
 with open (file_path, 'w') as f:
     json.dump(config, f, indent=4)
+os.chmod(file_path, 0o600)
