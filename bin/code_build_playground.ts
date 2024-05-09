@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { CodeBuildPlaygroundStack } from '../lib/code_build_playground-stack';
+import { CodeBuildGitHubStack } from '../lib/codebuild_github-stack';
 
 const app = new cdk.App();
-new CodeBuildPlaygroundStack(app, 'CodeBuildPlaygroundStack', {
+new CodeBuildGitHubStack(app, 'CodeBuildGitHubStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

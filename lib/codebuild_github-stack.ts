@@ -1,20 +1,22 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { aws_codebuild as codebuild } from 'aws-cdk-lib';
-import { load_configs } from './utils';
+import { loadLocalConfigs } from './utils';
 
-export class CodeBuildPlaygroundStack extends cdk.Stack {
+export class CodeBuildGitHubStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const config = load_configs()
+    const projectName = 'CdkManagedProject';
+
+    const config = loadLocalConfigs()
     const source: codebuild.Source = codebuild.Source.gitHub({
       owner: config['github_user'],
       repo: config['github_repo'],
     })
 
     const project = new codebuild.Project(this, 'CdkManagedProject', {
-      projectName: 'CdkManagedProject',
+      projectName,
       environment: {
         buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_ARM_3
       },
@@ -33,5 +35,7 @@ export class CodeBuildPlaygroundStack extends cdk.Stack {
       }),
       source: source
     });
+
+    new cdk.CfnOutput(this, "CBProjectName", {value: projectName});
   }
 }

@@ -13,3 +13,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
 * `npm run config`  generate a personalized `.config.json` file to configure the stack
+* `npx ts-node bin/connect_github.ts`  connect the CodeBuild project to github
+
+## Prerequisite
+1. [npm](https://www.npmjs.com/)
+
