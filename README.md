@@ -1,10 +1,28 @@
-# Welcome to your CDK TypeScript project
+# CodeBuild Playground
 
-This is a blank project for CDK development with TypeScript.
+** THIS IS A PERSONAL REPOSITORY. THIS IS NOT ENDORSED BY AWS OR CODEBUILD.**
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+This repository uses CDK to create basic resources required by AWS CodeBuild, so you can quickly create a basic CodeBuild project and run a build.
+
+## Prerequisites
+* Python3 (for `/bin/config.py`)
+* [Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+* CDK: `npm install -g aws-cdk`
+
+## Setup infra
+
+TODO
 
 ## Useful commands
+
+* `npm run config`  generate a personalized `.config.json` file to configure the stack
+* `npx ts-node <file>`, where the `<file>` can be,
+  * `bin/connect_github.ts`  connect the CodeBuild project to github PAT
+  * `bin/start_build.ts`     start a CodeBuild build
+
+## Useful TypeScript/CDK commands
+
+The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 * `npm run build`   compile typescript to js
 * `npm run watch`   watch for changes and compile
@@ -12,9 +30,4 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk deploy`  deploy this stack to your default AWS account/region
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
-* `npm run config`  generate a personalized `.config.json` file to configure the stack
-* `npx ts-node bin/connect_github.ts`  connect the CodeBuild project to github
-
-## Prerequisite
-1. [npm](https://www.npmjs.com/)
 

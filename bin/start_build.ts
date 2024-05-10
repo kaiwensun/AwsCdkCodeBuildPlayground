@@ -6,9 +6,7 @@ const stackName = "CodeBuildGitHubStack";
 export async function main() {
   const cb = new CodeBuildClient();
   const cfnOutput = await getCfnOutputs(stackName);
-  // const projects = await cb.send(new BatchGetProjectsCommand({
-  //     names: [cfnOutput.CBProjectName]
-  // }))
+
   const resp = await cb.send(
     new StartBuildCommand({
       projectName: cfnOutput.CBProjectName,
